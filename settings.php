@@ -371,4 +371,18 @@ if ($ADMIN->fulltree) {
         get_string('emailcontent_default', 'attendance'),
         PARAM_RAW
     ));
+
+    // Consecutive absence warnings.
+    $settings->add(new admin_setting_heading(
+        'defaultconsecwarningsettings',
+        new lang_string('defaultconsecwarningsettings', 'mod_attendance'),
+        new lang_string('defaultconsecwarningsettings_help', 'mod_attendance')
+    ));
+
+    $settings->add(new admin_setting_configcheckbox(
+        'attendance/enableconsecwarnings',
+        get_string('enableconsecwarnings', 'attendance'),
+        get_string('enableconsecwarnings_desc', 'attendance'),
+        0
+    ));
 }
