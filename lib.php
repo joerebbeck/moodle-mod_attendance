@@ -542,6 +542,23 @@ function attendance_print_settings_tabs($selected = 'settings') {
         );
     }
 
+    if (get_config('attendance', 'enableconsecwarnings')) {
+        $tabs[] = new tabobject(
+            'defaultconsecwarnings',
+            $CFG->wwwroot . '/mod/attendance/consecwarnings.php',
+            get_string('defaultconsecwarnings', 'attendance'),
+            get_string('defaultconsecwarnings', 'attendance'),
+            false
+        );
+        $tabs[] = new tabobject(
+            'consecabsences',
+            $CFG->wwwroot . '/mod/attendance/consecabsences.php',
+            get_string('consecabsencereport', 'attendance'),
+            get_string('consecabsencereport', 'attendance'),
+            false
+        );
+    }
+
     $tabs[] = new tabobject(
         'resetcalendar',
         $CFG->wwwroot . '/mod/attendance/resetcalendar.php',

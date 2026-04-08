@@ -685,3 +685,38 @@ $string['week'] = 'week(s)';
 $string['weekcommencing'] = 'Week commencing';
 $string['weeks'] = 'Weeks';
 $string['youcantdo'] = 'You can\'t do anything';
+
+// Consecutive absence warnings.
+$string['enableconsecwarnings'] = 'Enable consecutive absence warnings';
+$string['enableconsecwarnings_desc'] = 'When enabled, warnings can be sent when students miss a configured number of consecutive sessions.';
+$string['consecwarnings'] = 'Consecutive absence warnings';
+$string['consecwarningsdesc'] = 'These warnings will be automatically added to any new attendance activities. Configure rules to notify students and others when consecutive sessions are missed.';
+$string['consecwarningsdesc_course'] = 'Configure warnings for this attendance activity when students miss consecutive sessions.';
+$string['defaultconsecwarnings'] = 'Default consecutive warnings';
+$string['addconsecwarning'] = 'Add consecutive absence warning';
+$string['minabsences'] = 'Consecutive sessions missed';
+$string['minabsences_help'] = 'A warning will be triggered when a student misses this many consecutive sessions.';
+$string['consecwarningdeleted'] = 'Consecutive absence warning deleted';
+$string['consecwarningupdated'] = 'Consecutive absence warning saved';
+$string['consecwarningfailed'] = 'A warning with this number of consecutive absences already exists.';
+$string['consecwarningthreshold'] = 'Consecutive sessions';
+$string['deletewarningconfirm_consec'] = 'Are you sure you want to delete this consecutive absence warning?';
+$string['consecabsencereport'] = 'Consecutive absence report';
+$string['consecabsencereportdesc'] = 'This report shows students who have had consecutive session absences recorded.';
+$string['streakstart'] = 'First missed session';
+$string['streakend'] = 'Last missed session';
+$string['streakcount'] = 'Consecutive absences';
+$string['streakstatus'] = 'Status';
+$string['streakactive'] = 'Active';
+$string['streakcompleted'] = 'Completed';
+$string['noconsecabsences'] = 'No consecutive absences recorded.';
+$string['consecabsenceemailsubject_default'] = 'Attendance warning: consecutive absences in %coursename%';
+$string['consecabsenceemailcontent_default'] = 'Hi %userfirstname%,
+
+This is to notify you that you have missed %streakcount% consecutive session(s) of %attendancename% in %coursename%.
+
+Please contact your tutor if you have any concerns.';
+$string['consecabsencethirdpartyemailtext'] = '{$a->firstname} {$a->lastname} has missed {$a->streakcount} consecutive session(s) of {$a->attendancename} in {$a->coursename}.';
+$string['consecabsencechecktask'] = 'Check for consecutive absences and send warnings';
+$string['defaultconsecwarningsettings'] = 'Default consecutive absence warning settings';
+$string['defaultconsecwarningsettings_help'] = 'Configure the defaults used when creating new consecutive absence warnings.';

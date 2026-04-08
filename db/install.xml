@@ -159,6 +159,57 @@
         <INDEX NAME="notifyid_userid" UNIQUE="false" FIELDS="notifyid, userid"/>
       </INDEXES>
     </TABLE>
+    <TABLE NAME="attendance_consecwarning" COMMENT="Consecutive absence warning configuration">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="idnumber" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="attendance id or 0 for site-level defaults"/>
+        <FIELD NAME="minabsences" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Number of consecutive absences that triggers this warning"/>
+        <FIELD NAME="emailuser" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Whether to email the student"/>
+        <FIELD NAME="emailsubject" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="emailcontent" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="emailcontentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="thirdpartyemails" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Comma-separated list of extra user IDs to notify"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="idnumber_minabsences" TYPE="unique" FIELDS="idnumber, minabsences"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="attendance_consecabs" COMMENT="Records of consecutive absence streaks per student">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="attendanceid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="streakstart" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="sessdate of the first absent session in this streak"/>
+        <FIELD NAME="streakend" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="sessdate of the most recent absent session in this streak"/>
+        <FIELD NAME="count" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Number of consecutive sessions missed"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="1 when the streak ended because the student attended again"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="attendanceid_userid" UNIQUE="false" FIELDS="attendanceid, userid"/>
+        <INDEX NAME="attendanceid_userid_streakstart" UNIQUE="true" FIELDS="attendanceid, userid, streakstart"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="attendance_consecabs_done" COMMENT="Log of sent consecutive absence notifications">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="streakid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to attendance_consecabs"/>
+        <FIELD NAME="warningid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to attendance_consecwarning"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timesent" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="streakid_warningid" UNIQUE="false" FIELDS="streakid, warningid"/>
+      </INDEXES>
+    </TABLE>
     <TABLE NAME="attendance_rotate_passwords" COMMENT="Table to hold temporary passwords for rotate QR code feature.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>

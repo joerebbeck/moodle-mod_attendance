@@ -41,6 +41,14 @@ $tasks = [
         'day' => '*',
         'dayofweek' => '*',
         'month' => '*', ],
+    [
+        'classname' => 'mod_attendance\task\check_consecutive_absences',
+        'blocking' => 0,
+        'minute' => '45',
+        'hour' => '1',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*', ],
         [
         'classname' => 'mod_attendance\task\clear_temporary_passwords',
         'blocking' => 0,
