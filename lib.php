@@ -682,7 +682,16 @@ function attendance_extend_settings_navigation(settings_navigation $settingsnav,
             $nodes[] = ['url' => new moodle_url('/mod/attendance/warnings.php', ['id' => $cm->id]),
             'title' => get_string('warnings', 'attendance'), ];
         }
+        if (get_config('attendance', 'enableconsecwarnings')) {
+            $nodes[] = ['url' => new moodle_url('/mod/attendance/consecwarnings.php', ['id' => $cm->id]),
+            'title' => get_string('consecwarnings', 'attendance'), ];
+        }
     }
+    if (has_capability('mod/attendance:viewreports', $context) && get_config('attendance', 'enableconsecwarnings')) {
+        $nodes[] = ['url' => new moodle_url('/mod/attendance/consecabsences.php', ['id' => $cm->id]),
+                    'title' => get_string('consecabsencereport', 'attendance'), ];
+    }
+
 
     if (has_capability('mod/attendance:managetemporaryusers', context_module::instance($cm->id))) {
         $nodes[] = ['url' => new moodle_url('/mod/attendance/tempusers.php', ['id' => $cm->id]),
